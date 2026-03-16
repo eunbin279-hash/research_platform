@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
 import Home from './pages/Home';
 import Search from './pages/Search';
 import MyPage from './pages/MyPage';
+import LoginPage from './pages/LoginPage';
 import BottomNav from './components/BottomNav';
 import Header from './components/Header';
 import CreateSurveyModal from './components/CreateSurveyModal';
+import PrivateRoute from './components/PrivateRoute';
 
 const API_URL = 'http://localhost:3001';
 
@@ -46,12 +49,32 @@ function App() {
 
   return (
     <BrowserRouter>
+      <AuthProvider>
+        <AppContent 
+          surveys={surveys} 
+          showModal={showModal} 
+          handleShowModal={handleShowModal}
+          handleCloseModal={handleCloseModal} 
+          handleAddSurvey={handleAddSurvey} 
+        />
+      </AuthProvider>
+    </BrowserRouter>
+  );
+}
+
+function AppContent({ surveys, showModal, handleShowModal, handleCloseModal, handleAddSurvey }) {
+  const { currentUser } = useAuth();
+
+  return (
+    <>
       <Header onShowModal={handleShowModal} />
-      <CreateSurveyModal
-        show={showModal}
-        onHide={handleCloseModal}
-        onAddSurvey={handleAddSurvey}
-      />
+      {currentUser && (
+        <CreateSurveyModal
+          show={showModal}
+          onHide={handleCloseModal}
+          onAddSurvey={handleAddSurvey}
+        />
+      )}
       
       <div className="App">
         <main style={{ paddingBottom: '80px' }}>
@@ -60,13 +83,18 @@ function App() {
             <Route path="/search" element={<Search allSurveys={surveys} />} />
             <Route 
               path="/mypage" 
-              element={<MyPage allSurveys={surveys} />} 
+              element={
+                <PrivateRoute>
+                  <MyPage allSurveys={surveys} />
+                </PrivateRoute>
+              } 
             />
+            <Route path="/login" element={<LoginPage />} />
           </Routes>
         </main>
         <BottomNav />
       </div>
-    </BrowserRouter>
+    </>
   );
 }
 
