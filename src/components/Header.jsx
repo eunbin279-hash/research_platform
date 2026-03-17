@@ -19,7 +19,7 @@ function Header({ onShowModal }) {
   };
 
   return (
-    <Navbar bg="light" expand="lg" className="shadow-sm">
+    <Navbar expand="lg" className="shadow-sm" style={{ backgroundColor: 'var(--card-bg)', borderBottom: '1px solid var(--border-color)' }}>
       <Container>
         <Navbar.Brand as={Link} to="/" className="fw-bold">수요조사 플랫폼</Navbar.Brand>
         {currentUser && <Button variant="outline-primary" onClick={onShowModal}>새 수요조사 추가</Button>}

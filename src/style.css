@@ -3,12 +3,18 @@
 :root {
   --key-color: #dbfa75;
   --key-color-hover: #c8e663;
-  --text-on-key: #343a40;
+  --text-on-key: #121212;
+  --bg-color: #121212;
+  --card-bg: #1e1e1e;
+  --text-primary: #fdfdfd;
+  --text-secondary: #aaaaaa;
+  --border-color: #333333;
 }
 
 body {
   user-select: none;
-  background-color: #fdfdfd;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
   font-family: 'Wanted Sans Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
@@ -16,7 +22,9 @@ body {
   background-color: var(--key-color);
   border-color: var(--key-color);
   color: var(--text-on-key);
-  font-weight: bold;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.2s ease-in-out;
 }
 
 .btn-primary:hover,

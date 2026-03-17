@@ -3,17 +3,18 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f5f5f5;
+  background-color: var(--bg-color);
 }
 
 .login-container {
-  background-color: white;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background-color: var(--card-bg);
+  padding: 2.5rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   width: 100%;
   max-width: 400px;
   text-align: center;
+  border: 1px solid var(--border-color);
 }
 
 h2 {
@@ -34,8 +35,16 @@ h2 {
 .form-group input {
   width: 100%;
   padding: 0.75rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  background-color: #2a2a2a;
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  border-radius: 8px;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--key-color);
 }
 
 .error-message {
@@ -51,18 +60,20 @@ h2 {
 
 .button-group button {
   width: 100%;
-  padding: 0.75rem;
+  padding: 0.85rem;
   border: none;
-  border-radius: 4px;
-  background-color: #007bff;
-  color: white;
+  border-radius: 8px;
+  background-color: var(--key-color);
+  color: var(--text-on-key);
+  font-weight: 600;
   font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.2s ease-in-out;
 }
 
 .button-group button:hover {
-  background-color: #0056b3;
+  background-color: var(--key-color-hover);
+  transform: translateY(-2px);
 }
 
 .button-group button[type="button"] {
